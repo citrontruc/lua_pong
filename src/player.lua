@@ -21,8 +21,8 @@ function Player:new(initial_x, initial_y, size_x, size_y)
 end
 
 --Updates position using the player controller
-function Player:update()
-    self.x, self.y = self.player_controller:update(self.x, self.y, self.size_x, self.size_y)
+function Player:update(dt, joystick)
+    self.x, self.y = self.player_controller:update(dt, self.x, self.y, self.size_x, self.size_y, joystick)
 end
 
 -- Uses the graphic handler
