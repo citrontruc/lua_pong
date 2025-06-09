@@ -1,6 +1,6 @@
 -- An object to create a player character
 
-local PlayerController = require("src.player_controller")
+local PlayerController = require("src.player.player_controller")
 local PlayerGraphicsHandler = require("src.graphics_handler.player_graphics_handler")
 
 local Player = {}

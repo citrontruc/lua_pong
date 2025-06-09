@@ -4,9 +4,10 @@
     print'Lua is lovely'
 --]]
 
-local Player = require("src.player")
+local Player = require("src.player.player")
 local joystick = nil
 
+-- Main methods
 function love.load()
     player = Player:new(100, 100, 50, 50)
     local joysticks = love.joystick.getJoysticks()
@@ -22,9 +23,7 @@ function love.draw()
     player:draw()
 end
 
-function love.keypressed(key, scancode, isrepeat)
-   player.player_controller:set_control_type("keyboard")
-end
+-- Methods to change control type.
 
 function love.keypressed(key, scancode, isrepeat)
    player.player_controller:set_control_type("keyboard")

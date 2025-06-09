@@ -16,7 +16,7 @@ function Ball:new(initial_x, initial_y, initial_vx, initial_vy, size)
     return object
 end
 
-function Ball:move()
+function Ball:update()
     self.x = self.x + self.vx
     self.y = sel.y + self.vy
 end
