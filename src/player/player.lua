@@ -9,7 +9,9 @@ Player.__index = Player
 
 function Player:new(initial_x, initial_y, size_x, size_y, speed)
     local control_type = "keyboard"
-    local player = {x = initial_x,
+    local player = {
+        player_object = true,
+        x = initial_x,
         y = initial_y,
         size_x = size_x,
         size_y = size_y,
@@ -24,6 +26,12 @@ end
 function Player:update(dt, joystick)
     self.x, self.y = self.player_controller:update(dt, self.x, self.y, self.size_x, self.size_y, joystick)
     self.graphics_handler:update(self.x, self.y)
+end
+
+function Player:collide_x(x)
+end
+
+function Player:collide_y(y)
 end
 
 -- Uses the graphic handler

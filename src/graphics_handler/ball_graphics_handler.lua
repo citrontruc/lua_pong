@@ -4,14 +4,14 @@ local BallGraphicsHandler = {}
 BallGraphicsHandler.__index = BallGraphicsHandler  -- set up proper metatable for OOP
 
 --creation
-function BallGraphicsHandler:new(initial_x, initial_y, radius, rotation, rotation_speed, img_dir)
+function BallGraphicsHandler:new(initial_x, initial_y, radius, rotation, rotation_speed, img_object)
     local object = {
         x=initial_x,
         y=initial_y,
         radius=radius,
         rotation=rotation,
         rotation_speed = rotation_speed,
-        img = love.graphics.newImage(img_dir),
+        img = img_object.img,
         flip_width = 1,
         flip_height = 1
     }
