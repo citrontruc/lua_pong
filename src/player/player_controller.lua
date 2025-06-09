@@ -5,10 +5,10 @@ local PlayerController = {}
 PlayerController.__index = PlayerController
 
 --creation
-function PlayerController:new(control_type)
+function PlayerController:new(control_type, speed)
     local object = {
         control_type = control_type,
-        speed = 500,
+        speed = speed,
         acceleration = 1000
     }
     setmetatable(object, PlayerController)
@@ -73,8 +73,8 @@ end
 
 -- Check that player stays on screen
 function PlayerController:check_position(x, y, size_x, size_y)
-    x = math.min(math.max(0, x), love.graphics.getWidth() - size_x)
-    y = math.min(math.max(0, y), love.graphics.getHeight() - size_y)
+    x = math.min(math.max(size_x/2, x), love.graphics.getWidth() - size_x/2)
+    y = math.min(math.max(size_y/2, y), love.graphics.getHeight() - size_y/2)
     return x, y
 end
 

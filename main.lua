@@ -5,22 +5,26 @@
 --]]
 
 local Player = require("src.player.player")
+local Ball = require("src.ball.ball")
 local joystick = nil
 
 -- Main methods
 function love.load()
-    player = Player:new(100, 100, 50, 50)
+    player = Player:new(100, 100, 50, 50, 500)
+    ball = Ball:new(0, 0, 200, 200, 30, 0, 5, "src/assets/kirball.png")
     local joysticks = love.joystick.getJoysticks()
     joystick = joysticks[1]
 end
 
 function love.update(dt)
     player:update(dt, joystick)
+    ball:update(dt)
 end
 
 function love.draw()
     --love.graphics.print("Hello World!", 400, 300)
     player:draw()
+    ball:draw(dt)
 end
 
 -- Methods to change control type.
