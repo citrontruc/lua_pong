@@ -92,13 +92,29 @@ function Grid:compare_collision(object_1, object_2)
     if overlap_x > 0 and overlap_y > 0 then
         -- Resolve smaller overlap axis first
         if overlap_x < overlap_y then
-            local direction = dx > 0 and 1 or -1
-            object_1:collide_x(object_1.x + direction * overlap_x / 2)
-            object_2:collide_x(object_2.x - direction * overlap_x / 2)
+            local direction_x = dx > 0 and 1 or -1
+            if object_1.pushable_x and object_2.pushable_x then 
+                object_1:collide_x(object_1.x + direction_x * overlap_x / 2)
+                object_2:collide_x(object_2.x - direction_x * overlap_x / 2)
+            end
+            if object_1.pushable_x and not object_2.pushable_x then 
+                object_1:collide_x(object_1.x + direction_x * overlap_x)
+            end
+            if not object_1.pushable_x and object_2.pushable_x then 
+                object_2:collide_x(object_2.x - direction_x * overlap_x)
+            end
         else
-            local direction = dy > 0 and 1 or -1
-            object_1:collide_y(object_1.y + direction * overlap_y / 2)
-            object_2:collide_y(object_2.y - direction * overlap_y / 2)
+            local direction_y = dy > 0 and 1 or -1
+            if object_1.pushable_y and object_2.pushable_y then 
+                object_1:collide_y(object_1.y + direction_y * overlap_y / 2)
+                object_2:collide_y(object_2.y - direction_y * overlap_y / 2)
+            end
+            if object_1.pushable_y and not object_2.pushable_y then 
+                object_1:collide_y(object_1.y + direction_y * overlap_y)
+            end
+            if not object_1.pushable_y and object_2.pushable_y then 
+                object_2:collide_y(object_2.y - direction_y * overlap_y)
+            end
         end
     end
 end

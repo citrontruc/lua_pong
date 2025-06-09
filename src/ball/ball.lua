@@ -16,7 +16,9 @@ function Ball:new(initial_x, initial_y, initial_vx, initial_vy, radius, rotation
         radius = radius,
         size_x = radius, -- We use size x and size y to do collision checks
         size_y = radius, -- We use size x and size y to do collision checks
-        graphics_handler = BallGraphicsHandler:new(initial_x, initial_y, radius, rotation, rotation_speed, img_object)
+        graphics_handler = BallGraphicsHandler:new(initial_x, initial_y, radius, rotation, rotation_speed, img_object),
+        pushable_x = true,
+        pushable_y = true
     }
     setmetatable(object, Ball)
     return object
@@ -31,14 +33,18 @@ end
 
 -- Collision methods
 function Ball:check_walls(dt)
+    self.pushable_x = true
+    self.pushable_y = true
     -- Check collisions with walls and inverts speed if there is a collision with a wall.
     x = math.min(math.max(self.radius/2, self.x), love.graphics.getWidth() - self.radius/2)
     y = math.min(math.max(self.radius/2, self.y), love.graphics.getHeight() - self.radius/2)
     if x ~= self.x then 
         self:collide_x(x)
+        self.pushable_x = false
     end
     if y ~= self.y then
         self:collide_y(y)
+        self.pushable_y = false
     end
     
     self.graphics_handler:update(dt, x, y)

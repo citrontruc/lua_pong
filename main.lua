@@ -21,11 +21,11 @@ local ball_vy = 200
 local ball_size = 30
 
 -- Change sizeof screen
-love.window.setMode(1200, 900, flags)
+love.window.setMode(1500, 900, flags)
 
 -- Main methods
 function love.load()
-    player = Player:new(100, 100, 50, 50, 200)
+    player = Player:new(100, 100, 50, 50, 400)
     grid = Grid:new(cell_size_x, cell_size_y)
     grid:assign(player)
     kirby_image = Image:new("src/assets/kirball.png")
@@ -59,15 +59,17 @@ end
 
 function love.draw()
     --love.graphics.print("Hello World!", 400, 300)
-    player:draw()
+    --player:draw()
     local list_ball = grid:get_objects()
     for _, ball in pairs(list_ball) do
         ball:draw()
     end
+    -- We redraw the player so that he appears to squash the kirbys.
+    player:draw()
 end
 
--- Methods to change control type.
 
+-- Methods to change control type.
 function love.keypressed(key, scancode, isrepeat)
    player.player_controller:set_control_type("keyboard")
 end

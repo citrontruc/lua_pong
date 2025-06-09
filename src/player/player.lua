@@ -16,7 +16,9 @@ function Player:new(initial_x, initial_y, size_x, size_y, speed)
         size_x = size_x,
         size_y = size_y,
         player_controller = PlayerController:new(control_type, speed),
-        graphics_handler = PlayerGraphicsHandler:new(size_x, size_y)
+        graphics_handler = PlayerGraphicsHandler:new(size_x, size_y),
+        pushable_x = false,
+        pushable_y = false
     }
     setmetatable(player, Player)
     return player
