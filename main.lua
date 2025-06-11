@@ -13,7 +13,7 @@ local joystick = nil
 -- Cell info
 local cell_size_x = 100
 local cell_size_y = 100
-local num_balls = 1000
+local num_balls = 500
 
 -- ball info
 local ball_xv = 200
@@ -21,7 +21,7 @@ local ball_vy = 200
 local ball_size = 30
 
 -- Change sizeof screen
-love.window.setMode(1500, 900, flags)
+love.window.setMode(1200, 800, flags)
 
 -- Main methods
 function love.load()

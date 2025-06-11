@@ -1,1 +1,0 @@
--- A class to create powerups for our game of pong
