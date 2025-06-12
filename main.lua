@@ -1,9 +1,9 @@
--- Launch love with alt+l or love lua_pong --console
 -- This a multi line comment
 --[[
     print'Lua is lovely'
 --]]
 
+-- Imports of our item
 local Ball = require("src.ball.ball")
 local Grid = require("src.grid.grid")
 local Image = require("src.graphics_handler.image_item")
@@ -25,6 +25,8 @@ love.window.setMode(1200, 800, flags)
 
 -- Main methods
 function love.load()
+    -- We create a player and a grid that will store all of our objects
+    -- The role of our grid is to handle collision detection
     player = Player:new(100, 100, 50, 50, 400)
     grid = Grid:new(cell_size_x, cell_size_y)
     grid:assign(player)
@@ -43,23 +45,29 @@ function love.load()
             )
         )
     end
+
+    -- Controls to take care of our controller
     local joysticks = love.joystick.getJoysticks()
     joystick = joysticks[1]
 end
 
 function love.update(dt)
     --player:update(dt, joystick)
+
+    -- We update all of the elements in our grids
     local list_ball = grid:get_objects()
     for _, ball in pairs(list_ball) do
         ball:update(dt, joystick)
     end
-    grid:update_cells()
-    grid:evaluate_collision()
+
+    -- Once all of the elements have been updated, we let our grid take care of collisions by cells
+    grid:update()
 end
 
 function love.draw()
     --love.graphics.print("Hello World!", 400, 300)
-    --player:draw()
+    
+    -- We draw all the elements in our grid to fill our screen
     local list_ball = grid:get_objects()
     for _, ball in pairs(list_ball) do
         ball:draw()
@@ -70,6 +78,7 @@ end
 
 
 -- Methods to change control type.
+-- If a controller is pressed, we change to detect controller input
 function love.keypressed(key, scancode, isrepeat)
    player.player_controller:set_control_type("keyboard")
 end

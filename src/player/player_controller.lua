@@ -1,5 +1,5 @@
 -- A class to control our player character
--- TODO; set up controller support
+-- TODO; set up controller support (right now, only dpad)
 
 local PlayerController = {}
 PlayerController.__index = PlayerController
@@ -38,6 +38,7 @@ function PlayerController:update(dt, x, y, size_x, size_y, joystick)
 end
 
 --movement functions
+--movement with keyboard
 function PlayerController:move_with_keyboard(dt, x,y, joystick)
     if love.keyboard.isDown("down") then
         y = y + self.speed * dt
@@ -54,6 +55,7 @@ function PlayerController:move_with_keyboard(dt, x,y, joystick)
     return x, y
 end
 
+-- movement with controller
 function PlayerController:move_with_controller(dt, x,y, joystick)
     if not joystick then return x, y end
     if joystick:isGamepadDown("dpdown") then

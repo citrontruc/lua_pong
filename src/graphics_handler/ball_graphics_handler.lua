@@ -23,7 +23,7 @@ function BallGraphicsHandler:new(initial_x, initial_y, radius, rotation, rotatio
     return object
 end
 
--- Methods to update
+-- Methods to update the image. Image is rotated over time.
 function BallGraphicsHandler:update(dt, x, y)
     self.x, self.y = x, y
     self.rotation = self.rotation + self.rotation_speed * dt
@@ -39,7 +39,6 @@ end
 
 -- Methods to draw our image
 function BallGraphicsHandler:draw()
-    -- x, y, width height, can have round corners if needed
     -- love.graphics.circles("fill", x, y, self.radius)
     love.graphics.draw(
         self.img, 

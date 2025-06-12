@@ -1,4 +1,5 @@
 -- An object to deliminate our screen to a grid and help limit the number of collisions to test
+-- The grid divides our screen in squares so that we can do local comparisons between items
 
 local Grid = {}
 Grid.__index = Grid
@@ -17,10 +18,12 @@ function Grid:new(cell_size_x, cell_size_y)
     return object
 end
 
+-- We assign an object to our grid
 function Grid:assign(object)
     table.insert(self.list_object, object)
 end
 
+-- Getter function
 function Grid:get_objects()
     return self.list_object
 end
@@ -39,6 +42,7 @@ function Grid:reset_cells()
     end
 end
 
+-- For every item, we assign them a cell
 function Grid:update_cells()
     self:reset_cells()
     for key, object in pairs(self.list_object) do
@@ -48,6 +52,7 @@ function Grid:update_cells()
     end
 end
 
+-- We evaluate the collisions between items of adjacent cells
 function Grid:evaluate_collision()
     for x = 1, self.num_cell_x do
         for y = 1, self.num_cell_y do
@@ -83,6 +88,8 @@ function Grid:evaluate_collision()
     end
 end
 
+-- If two items collide, apply collision effects to both items.
+-- If an item has special properties (example: not pushable), apply special collision.
 function Grid:compare_collision(object_1, object_2)
     local dx = object_1.x - object_2.x
     local dy = object_1.y - object_2.y

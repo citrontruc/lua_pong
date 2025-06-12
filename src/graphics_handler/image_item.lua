@@ -1,4 +1,5 @@
 -- A method to load images and handle them.
+-- Avoids having to create an image for every item 
 
 local Image = {}
 Image.__index = Image

@@ -1,5 +1,7 @@
 -- An object to create a player character
+-- This object can be moved by using the keyboard or a controller
 
+-- An object to handle how we control the player and an object to handle graphics
 local PlayerController = require("src.player.player_controller")
 local PlayerGraphicsHandler = require("src.graphics_handler.player_graphics_handler")
 
@@ -30,13 +32,14 @@ function Player:update(dt, joystick)
     self.graphics_handler:update(self.x, self.y)
 end
 
+-- Player can't be moved by collisions.
 function Player:collide_x(x)
 end
 
 function Player:collide_y(y)
 end
 
--- Uses the graphic handler
+-- Uses the graphic handler to draw the player on screen.
 function Player:draw()
     self.graphics_handler:draw()
 end
